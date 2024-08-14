@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>message</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap&family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+    <style>
+   
+   body {
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #6EACDA, #03346E);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.text {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.arrows {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+}
+
+.arrow {
+    font-size: 2em;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+}
+
+.arrow:hover {
+    color: #6EACDA;
+}
+
+.right img {
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.next {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .left {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .text {
+        font-size: 1.2em;
+    }
+    .arrows {
+        width: 80px;
+    }
+    .arrow {
+        font-size: 1.5em;
+    }
+    .right img {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .text {
+        font-size: 1em;
+    }
+    .arrows {
+        width: 60px;
+    }
+    .arrow {
+        font-size: 1.2em;
+    }
+    .right img {
+        max-width: 200px;
+    }
+    .next {
+        display: none;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="text" id="text">
+                <!-- Text will be inserted here by JavaScript -->
+            </div>
+            <div class="arrows">
+                <div class="arrow" id="prev">&#9664;</div>
+                <div class="arrow" id="next">&#9654;</div>
+            </div>
+        </div>
+        <div class="right">
+            <img id="image" height="300px" src="" alt="Slideshow Image">
+        </div>
+    </div>
+   
+        <a href="video.html" class="next" ><img src="https://media1.giphy.com/media/dCERkihZ9m7xjIvSau/200w.gif" alt=""  height="100px"></a>
+        
+    
+    <script>
+        const texts = [
+            "Happiestt birthdayyyy sidduluuuuu... heheheheheh😂 we really became close, aren't we???? ",
+             "Actuallyy i wanted to write a paragraph only but i think i can make a website for youuu since i know how to do ittt.. even if you dont like this itssssss okayyyyyyyyyyyyyyy🙂😒",
+            "I still remember you in my first year😂 You were holding your hands while getting into the bus😂😂. Sneha and I were like heyyy this annayyaa is soo goodd and handsome too😂😂🤦🏻‍♀ But now I'm realising that you are not handsome at allllll👀🙈. (Jk, you aree theeee mostt handsome mannnn i have ever seenn. Ekkuvaindi gaaa😂 konchame handsome untv le ).",
+            "Sidduluu, I just want to tell you one thing, eppudu antav gaa bore ipote Ela ney anii. Aite m undi?? Bore ite dooram avtama? Avvamuuuu. Avvanuuuuu. Andd nvv bore kuda avvavuu. Maybe nen nik bore kodtee cheppelemm😂🙈. (Chempa pagultadii itee)😂😂 I love talking to you,even if we don't have anything to talk😁.",
+            "These days, we aren't talking as much as we used to, and that's totally okayyyyy. In the future, I don't know what we'll be doing or where we'll be, so there may be times when we don't have as much time to talk like we did in the past. cause We're at an age where we have our own things to handle and our responsibilities, right? But all i can say that even if we don't talk much, nothing will change between us. I'll still be the same old Mahithaaaa, and I hope you'll be the same old Sidduuu. 😂🙈",
+            "so this one is the motivational slide, hehehehehe><... soo i know you are reallyy confused about what you need to do further! but let me tell you something, many people dont know what they really want in their life, what they really want to do and what really makes them happy!! but siddu, you clearly know what you really want and what makes you happy then why thinking????. okayy, money matters!! but everything starts from zero ryt?? idk what im saying😂😂 hehehehe.. (Part-1 antee indulo saripovatle motivation heheheh)",
+            "what you really need to know is how you should start?? how you will learn. eh field lo ina total ga mana painne depend ayyi untadi we need to give our all to become successfull. andar smartwork antar kaani i believe in hardwork, like nv e age lo hardwork cheste future lo bauntadi ani na opinion!! e time malli raaduu m cheyyali anpiste adi cheyyaliii ani antar kaani balance cheyyadam chaalaa important!! enthainaaa we need to make our parents proud ryt?????..(part-2 heheh antha oke dantlo pedte manchig kanpiyyatlee sooooo next slide hehehe) ","ivannii cheptunna kaanii nenem chestanooooo!!! soo what im sayingg isss whatever you doo i'll always support youuu!! baboiii chala ne rasesnaa navvostee navvukoo kaaanii chat lo ivanni chepkuntuu navvite tanthaa.(end of motivation)",
+            "Na bdy ki annavv Godvalu petkonii odleyyakuu anii. Godvalaite adtaaa, algutaa kuda kaanii odleyyanu🙈. (END)"
+        ];
+
+        const images = [
+            "https://gifdb.com/images/high/cute-happy-birthday-dancing-kawaii-panda-sticker-n7o57h7etuqg6swc.gif",
+            "https://www.icegif.com/wp-content/uploads/2022/08/icegif-572.gif",
+            "https://media.tenor.com/hUhVNaecIiQAAAAC/laughing-bear.gif",
+            "https://i.pinimg.com/originals/02/0d/f9/020df91ae5d671fccf42491f45081ccf.gif",
+            "https://i.pinimg.com/originals/9b/11/cf/9b11cf5892bfac8de67f666d7ed40a3d.gif",
+            "https://media.tenor.com/D75xzWpkx30AAAAM/why-hello.gif",
+            "https://media.tenor.com/7LFo5MZSn8YAAAAM/cat-cute.gif",
+            "https://i.pinimg.com/originals/21/46/ab/2146ab574a4aace6a99c2e0f0d83c3ab.gif",
+            "https://i.pinimg.com/originals/6e/07/ff/6e07ff8bb6fb04b0e21d3fe50dec88c3.gif"
+        ];
+        
+        let currentIndex = 0;
+        
+        const textElement = document.getElementById('text');
+        const imageElement = document.getElementById('image');
+        const prevArrow = document.getElementById('prev');
+        const nextArrow = document.getElementById('next');
+        
+        function updateContent() {
+            textElement.textContent = texts[currentIndex];
+            imageElement.src = images[currentIndex];
+        }
+        
+        prevArrow.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? texts.length - 1 : currentIndex - 1;
+            updateContent();
+        });
+        
+        nextArrow.addEventListener('click', () => {
+            currentIndex = (currentIndex === texts.length - 1) ? 0 : currentIndex + 1;
+            updateContent();
+        });
+        
+        // Initialize the first text and image
+        updateContent();
+    </script>
+</body>
+</html>

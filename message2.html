@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Fireworks</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Amatic+SC:wght@700&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .firework, .spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: transparent;
+            border-radius: 50%;
+            transform-origin: center;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1) translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(var(--scale)) translateX(calc(200px * var(--x))) translateY(calc(200px * var(--y)));
+                opacity: 0;
+            }
+        }
+
+        @keyframes trail {
+            0% {
+                transform: scale(1) translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.5) translateX(calc(-100px * var(--x))) translateY(calc(-100px * var(--y)));
+                opacity: 0;
+            }
+        }
+
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: #FFD700; /* Gold color */
+            text-align: center;
+            font-family: 'Amatic SC', cursive;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            white-space: nowrap;
+        }
+
+        p {
+            color: #FFD700;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="text">HAPPIEST BIRTHDAY SIDDULUUUUU 🐣🙈</div>
+    <p>ekku alochinchakuu avvi crackerss😂🤣</p>
+
+    <script>
+        function createFirework(x, y) {
+            const numParticles = 80;
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework';
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+
+                const size = Math.random() * 3 + 2; // Particle size between 2px and 5px
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`; // Random color
+                particle.style.boxShadow = `0 0 10px ${particle.style.backgroundColor}`;
+                particle.style.setProperty('--scale', Math.random() * 1.5 + 1); // Random scale
+
+                // Set random direction for each particle
+                const angle = Math.random() * 2 * Math.PI;
+                const xSpeed = Math.cos(angle);
+                const ySpeed = Math.sin(angle);
+                particle.style.setProperty('--x', xSpeed);
+                particle.style.setProperty('--y', ySpeed);
+
+                const animationDuration = Math.random() * 1 + 1; // Duration between 1s and 2s
+                particle.style.animation = `explode ${animationDuration}s ease-out forwards`;
+
+                document.body.appendChild(particle);
+
+                // Remove particles after animation ends
+                particle.addEventListener('animationend', () => {
+                    document.body.removeChild(particle);
+                });
+            }
+
+            // Create trailing sparkles
+            for (let i = 0; i < 20; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = `${x}px`;
+                spark.style.top = `${y}px`;
+
+                spark.style.width = `2px`;
+                spark.style.height = `2px`;
+                spark.style.backgroundColor = `white`;
+                spark.style.boxShadow = `0 0 5px white`;
+
+                const angle = Math.random() * 2 * Math.PI;
+                const xSpeed = Math.cos(angle);
+                const ySpeed = Math.sin(angle);
+                spark.style.setProperty('--x', xSpeed);
+                spark.style.setProperty('--y', ySpeed);
+
+                const sparkDuration = Math.random() * 0.5 + 0.5; // Duration between 0.5s and 1s
+                spark.style.animation = `trail ${sparkDuration}s ease-out forwards`;
+
+                document.body.appendChild(spark);
+
+                // Remove sparks after animation ends
+                spark.addEventListener('animationend', () => {
+                    document.body.removeChild(spark);
+                });
+            }
+        }
+
+        function generateFireworks() {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createFirework(x, y);
+        }
+
+        // Create fireworks at regular intervals
+        setInterval(generateFireworks, 1500);
+    </script>
+</body>
+</html>
